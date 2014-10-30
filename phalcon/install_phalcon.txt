@@ -1,0 +1,38 @@
+
+install command
+
+    http://docs.phalconphp.com/en/latest/reference/install.html
+
+
+install on Ubuntu
+
+    apt-get install php5-dev git-core gcc make
+    apt-get install php5-mysql
+
+
+install on CentOS/Fedora/RHEL
+
+    yum install php-devel pcre-devel gcc make
+
+
+php.ini add extension
+
+    vi /etc/php5/conf.d/phalcon.ini
+        extension=phalcon.so
+
+    vi /etc/php.d/phalcon.ini
+        extension=phalcon.so
+
+    vi /usr/local/zend/etc/conf.d/phalcon.ini
+        extension=phalcon.so
+
+
+如果安裝 install 檔案時出錯
+
+    bash: ./install: /bin/bash^M: bad interpreter: No such file or directory
+
+    可以去除裡面所有的 \r
+
+    sed -i "s/\r//" install
+
+

@@ -1,0 +1,30 @@
+##################################################
+Options -Indexes
+
+
+##################################################
+# deny access
+<FilesMatch ".(bak|config|sql|csv|psd|ini|log|sh|inc|~|swp|tar|gz|zip|7z)$">
+    Order allow,deny
+    Deny from all
+    Satisfy all
+</FilesMatch>
+
+
+##################################################
+# 設定開發環境變數
+# 取用方式為 $_SERVER['IS_DEVELOPER_MODE']
+SetEnvIf Host "localhost"                   IS_DEVELOPER_MODE=1
+SetEnvIf Host "training.simplybridal.com"   IS_DEVELOPER_MODE=1
+
+
+##################################################
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /gear
+
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^(.*)$ index.php?_url=/$1 [QSA,L]
+</IfModule>
+

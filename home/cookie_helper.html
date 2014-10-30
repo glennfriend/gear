@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <style type="text/css">
+        body {
+            line-height:24px;
+        }
+    </style>
+    <script type="text/javascript" charset="utf-8" src="dist/jquery/jquery-1.11.1.js"></script>
+    <script type="text/javascript" charset="utf-8" src="dist/jquery/jquery.cookie.js"></script>
+</head>
+<body>
+
+    <div>
+        switch 1/0
+        <div>
+            <input type="button" value="isSwitch1" onclick="changeValue(this);" />
+            <input type="button" value="isSwitch2" onclick="changeValue(this);" />
+            <input type="button" value="isSwitch3" onclick="changeValue(this);" />
+        </div>
+    </div>
+    <div id="display">
+        cookies list: <br /><br />
+    </div>
+
+    <script type="text/javascript" charset="utf-8">
+        "use strict";
+
+        /**
+         *  1 and 0 切換
+         */
+        function changeValue( obj, defaultValue )
+        {
+            var option = {
+                'path':'/'
+            };
+            var defaultValue = defaultValue || 0;
+
+            var value = $.cookie(obj.value);
+            value = ( isNaN(value) ? defaultValue : value );
+            
+            value = 1-value;
+            if ( value !== 0 ) {
+                $.cookie(obj.value, value);
+            }
+            else {
+                $.removeCookie(obj.value);
+            }
+
+            reflashCookies();
+        }
+
+        /**
+         *  reflash Cookies
+         */
+        function reflashCookies()
+        {
+            var list = document.cookie.split(";");
+            var html = '';
+            for( var i=0; i<list.length; i++ ) {
+                html += '<li>' + list[i] + '</li>';
+            }
+
+            var display = document.getElementById('display');
+            display.innerHTML = '<ul>'+ html +'</ul>';
+        }
+
+        /**
+         *  init
+         */
+        $(function() {
+            reflashCookies();
+        });
+
+    </script>
+
+</body>
+</html>
