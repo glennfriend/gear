@@ -13,7 +13,7 @@ class SessionBrg
      */
     public static function init()
     {
-        session_save_path( APP_BASE_PATH . '/app/tmp/session' );
+        session_save_path( APP_BASE_PATH . '/var/session' );
 
         /*
         // cookie name ????

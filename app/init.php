@@ -62,8 +62,8 @@ $factoryApplication = function()
     RegisterManager::set('url', $app->url );
 
     //
-    LogBrg::init(   APP_BASE_PATH .'/app/tmp/log/'   );
-    CacheBrg::init( APP_BASE_PATH .'/app/tmp/cache/' );
+    LogBrg::init(   APP_BASE_PATH .'/var/log/'   );
+    CacheBrg::init( APP_BASE_PATH .'/var/cache/' );
 
     /**
      *  zend loader

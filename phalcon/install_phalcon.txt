@@ -27,12 +27,14 @@ php.ini add extension
         extension=phalcon.so
 
 
-�p�G�w�� install �ɮ׮ɥX��
+如果安裝 install 檔案時出錯
 
     bash: ./install: /bin/bash^M: bad interpreter: No such file or directory
 
-    �i�H�h���̭��Ҧ��� \r
+    以下指令可以去除裡面所有的 \r
+        sed -i "s/\r//" install
 
-    sed -i "s/\r//" install
+    以下指令可以去除裡面所有的 \r
+        cat install | col -b > install.new ; chmod +x install.new
 
 
