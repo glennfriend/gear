@@ -4,10 +4,9 @@
 
 #### framework
 var/*
+var/!.htaccess
 app/config/config.php
 home/media/*
 
 ####
-.*
-!.gitignore
 
