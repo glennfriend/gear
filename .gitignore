@@ -4,7 +4,7 @@
 
 #### framework
 var/*
-var/!.htaccess
+!var/.htaccess
 app/config/config.php
 home/media/*
 
