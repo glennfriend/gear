@@ -3,12 +3,11 @@
 *~
 
 #### framework
-app/tmp/*
+var/*
 app/config/config.php
 home/media/*
 
 ####
 .*
 !.gitignore
-!.htaccess
-!app/tmp/.htaccess
+
