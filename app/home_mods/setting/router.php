@@ -1,8 +1,8 @@
 <?php
 
-    // 如果是相同名稱的 router, 後面的會蓋掉前面的
-    
-    // http://phalcon.5iunix.net/reference/routing.html
+    /**
+     *  @see http://phalcon.5iunix.net/reference/routing.html
+     */    
     $router = new \Phalcon\Mvc\Router(false);
 
     // default
@@ -11,14 +11,11 @@
         'action'     => 'index',
     ));
 
-    // not found - 開發時請關閉
-    /*
+    // page not found
     $router->notFound(array(
         "controller" => 'error',
         "action"     => 'index'
     ));
-    return $router;
-    */
 
 
 /*
@@ -113,5 +110,11 @@
             "id"         => 3,
         )
     );
+
+    如果是相同名稱的 router, 後面的會蓋掉前面的
+
 */
 
+    return $router;
+
+?>
