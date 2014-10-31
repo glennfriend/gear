@@ -8,10 +8,14 @@
  *
  *  is static class
  *
- *  @version     1.0.0.0
- *  @category    Ydin
- *  @package     Ydin\Event
+ *  @version    1.0.0.1
+ *  @category   Ydin
+ *  @package    Ydin\Event
  *  @uses
+ *
+ *  @history    1.0.0.0
+ *  @history    1.0.0.1 - fix notify(), from include() to include_once()
+ *
  */
 namespace Ydin;
 
@@ -48,7 +52,8 @@ class Event
     /**
      *  呼叫已訂閱的 event 程式
      *
-     *  @param string programName
+     *  @param string  $method - program name
+     *  @param array   $params - program params
      */
     public static function notify( $method, $params )
     {
@@ -56,7 +61,7 @@ class Event
 
         foreach ( self::$_event as $className ) {
             $handler = array( $className, $method );
-            include( self::$_path .'/'. $className . '.php' );
+            include_once( self::$_path .'/'. $className . '.php' );
             if ( !is_callable($handler) ) {
                 continue;
             }
