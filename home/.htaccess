@@ -14,8 +14,8 @@ Options -Indexes
 ##################################################
 # 設定開發環境變數
 # 取用方式為 $_SERVER['IS_DEVELOPER_MODE']
-SetEnvIf Host "localhost"                   IS_DEVELOPER_MODE=1
-SetEnvIf Host "training.simplybridal.com"   IS_DEVELOPER_MODE=1
+# SetEnvIf Host "localhost"                   IS_DEVELOPER_MODE=1
+# SetEnvIf Host "training.simplybridal.com"   IS_DEVELOPER_MODE=1
 
 
 ##################################################
