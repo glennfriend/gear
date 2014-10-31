@@ -11,7 +11,7 @@ namespace Blocks\FormMessage;
 class Block extends \Blocks\BaseBlock
 {
 
-    public $data;
+    protected $data = array();
 
     public function __construct()
     {
