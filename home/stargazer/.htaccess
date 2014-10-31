@@ -1,0 +1,23 @@
+##################################################
+Options -Indexes
+
+
+##################################################
+# deny access
+<FilesMatch ".(bak|config|sql|csv|psd|ini|log|sh|inc|~|swp|tar|gz|zip|7z)$">
+    Order allow,deny
+    Deny from all
+    Satisfy all
+</FilesMatch>
+
+
+##################################################
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /gear/stargazer
+
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^(.*)$ index.php?_url=/$1 [QSA,L]
+</IfModule>
+
