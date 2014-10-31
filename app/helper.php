@@ -170,6 +170,13 @@ function block( $key )
     }
 
     $className = 'Blocks\\' . trim($args[0]) . '\\Block';
+    if ( !class_exists($className) ) {
+        // log & message
+        $backtrace = debug_backtrace();
+        $msg = $backtrace[0]['file'] . ' line '. $backtrace[0]['line'];
+        logBrg::error( trim($args[0]) . " block not found in " . $msg);
+        return '[block error2]';
+    }
     try {
         switch( $numArgs )
         {
@@ -179,11 +186,11 @@ function block( $key )
             case 4: return new $className( $args[1], $args[2], $args[3] );           exit;
             case 5: return new $className( $args[1], $args[2], $args[3], $args[4] ); exit;
             default:
-                return '[block error2]';
+                return '[block error3]';
         }
     }
     catch( Exception $e ) {
-        echo '[block error3]';
+        echo '[block error4]';
         exit;
     }
 }
