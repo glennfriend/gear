@@ -101,7 +101,7 @@ class LogBrg
      */
     public static function write( $file, $content )
     {
-        // TODO: please validate file name
+        // TODO: please validate file name, only a-z & one dot(.) & no double dot (..)
         // .......
     
         $filename = self::$logPath .'/'. $file;

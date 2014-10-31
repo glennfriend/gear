@@ -14,7 +14,7 @@ class InfoBrg
      *  傳送至 hipChat service
      *  @return boolean
      */
-    public static function hipChat( $text, $roomName='stargazer', $from='wms', $color=null )
+    public static function hipChat( $text, $roomName='stargazer', $from='gear', $color=null )
     {
         Yii::import('application.vendors.HipChat.*');
         require_once 'HipChat.php';
