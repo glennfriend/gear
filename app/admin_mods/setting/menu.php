@@ -6,9 +6,8 @@
     );
 
     // Dashboard
-    $option = array(
-        'main_order' => 100,
-        'main'      => array(
+    MenuManager::addOption(array(
+        'main' => array(
             'key'   => 'dashboard',
             'label' => 'Dashboard',
             'link'  => url('dashboard'),
@@ -16,50 +15,48 @@
         ),
         'sub' => array(
             array(
-                'key'   => 'dashboard',
-                'label' => 'Dashboard',
+                'key'   => 'board1',
+                'label' => 'board1 by visit 未設定無限寬度',
                 'link'  => url('dashboard'),
                 'role'  => $roles['lowest'],
+            ),
+            array(
+                'key'   => 'board2',
+                'label' => 'board2 by manager 未設定顯示權限',
+                'link'  => url('dashboard',array('display'=>'advanced')),
+                'role'  => $roles['manager'],
             )
         )
-    );
-    MenuManager::addOption($option);
+    ));
 
     // 系統功能
-    $option = array(
-        'main_order' => 900,
-        'main'      => array(
+    MenuManager::addOption(array(
+        'main' => array(
             'key'   => 'system',
-            'label' => 'System',
             'link'  => url('systemic/config'),
             'role'  => $roles['manager'],
         ),
         'sub' => array(
             array(
                 'key'   => 'config',
-                'label' => 'Config',
                 'link'  => url('systemic/config'),
                 'role'  => $roles['manager'],
             ),
             array(
                 'key'   => 'environment',
-                'label' => 'Environment',
                 'link'  => url('systemic/environment'),
                 'role'  => $roles['manager'],
             ),
             array(
                 'key'   => 'gearman',
-                'label' => 'Gearman',
                 'link'  => url('systemic/gearman'),
                 'role'  => $roles['manager'],
             ),
             array(
                 'key'   => 'passwd',
-                'label' => 'Passwd',
                 'link'  => url('systemic/passwd'),
                 'role'  => $roles['manager'],
             )
         )
-    );
-    MenuManager::addOption($option);
+    ));
 

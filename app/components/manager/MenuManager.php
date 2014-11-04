@@ -1,42 +1,12 @@
 <?php
-/*
-    example:
-
-        MenuManager::addOptions( array(......) );
-        MenuManager::addOptions( array(......) );
-        MenuManager::addOptions( array(......) );
-
-        // about main menu
-        foreach ( MenuManager::getOrderMenu() as $menu ) {
-
-
-        }
-
-        // about sub menu
-        $menu = MenuManager::getFocusMenu();
-        foreach ( $menu['sub'] as $subMenu ) {
-            
-        }
-*/
-
-
-
 /**
- *  plugin base
- *
- *  initOrder 為執行 plugin 的順序值
- *      from 1 to 999
- *  
- *  menuOrder 為從由而右放置的順序值
- *      from 1 to 999
- *  
- *  
- *  
- *  
+ *  MenuManager
  *  
  */
 class MenuManager
 {
+
+    CONST LOWEST_ROLE = 'visit';
 
     /**
      *
@@ -46,12 +16,12 @@ class MenuManager
     /**
      *
      */
-    static protected $_mainFocus = null;
+    static protected $_mainKey = null;
 
     /**
      *
      */
-    static protected $_subFocus = null;
+    static protected $_subKey = null;
 
     /**
      *  add option
@@ -62,9 +32,8 @@ class MenuManager
     static public function addOption( $option )
     {
         $option += array(
-            'main_order' => 200,
-            'main'       => array(),
-            'sub'        => array()
+            'main' => array(),
+            'sub'  => array()
         );
 
         $key = null;
@@ -76,6 +45,27 @@ class MenuManager
             return false;
         }
 
+        // auto setting role
+        if ( !isset($option['main']['label']) ) {
+            $option['main']['role'] = self::LOWEST_ROLE;
+        }
+        foreach ( $option['sub'] as $index => $sub ) {
+            if ( !isset($option['sub'][$index]['label']) ) {
+                $option['sub'][$index]['role'] = self::LOWEST_ROLE;
+            }
+        }
+
+        // auto setting label
+        if ( !isset($option['main']['label']) ) {
+            $option['main']['label'] = ucfirst($option['main']['key']);
+        }
+        foreach ( $option['sub'] as $index => $sub ) {
+            if ( !isset($option['sub'][$index]['label']) ) {
+                $option['sub'][$index]['label'] = ucfirst($option['sub'][$index]['key']);
+            }
+        }
+
+        // save to
         self::$_options[$key] = $option;
         return true;
     }
@@ -83,9 +73,9 @@ class MenuManager
     /**
      *
      */
-    static public function getMainFocus()
+    static public function getMainKey()
     {
-        return self::$_mainFocus;
+        return self::$_mainKey;
     }
 
     /**
@@ -93,22 +83,22 @@ class MenuManager
      *
      *  @return boolean
      */
-    static public function setMainFocus( $key )
+    static public function setMainKey( $key )
     {
         $menu = self::getMenu($key);
         if ( !$menu ) {
             return false;
         }
-        self::$_mainFocus = $key;
+        self::$_mainKey = $key;
         return true;
     }
 
     /**
      *
      */
-    static public function getSubFocus()
+    static public function getSubKey()
     {
-        return self::$_subFocus;
+        return self::$_subKey;
     }
 
     /**
@@ -117,21 +107,21 @@ class MenuManager
      *
      *  @return boolean
      */
-    static public function setSubFocus( $subFocus )
+    static public function setSubKey( $subKey )
     {
-        $mainFocus = self::getMainFocus();
-        if ( !$mainFocus ) {
+        $mainKey = self::getMainKey();
+        if ( !$mainKey ) {
             return false;
         }
 
-        if ( !isset(self::$_options[$mainFocus]) ) {
+        if ( !isset(self::$_options[$mainKey]) ) {
             return false;
         }
-        $option = self::$_options[$mainFocus];
+        $option = self::$_options[$mainKey];
 
         foreach ( $option['sub'] as $index => $sub ) {
-            if ( $sub['key'] === $subFocus ) {
-                self::$_subFocus = $subFocus;
+            if ( $sub['key'] === $subKey ) {
+                self::$_subKey = $subKey;
                 return true;
             }
         }
@@ -160,44 +150,46 @@ class MenuManager
     /**
      *  取得 focus 的 main menu
      *
-     *  @return array or false
+     *  @return array or empty array
      */
-    static public function getFocusMain()
+    static public function getMain()
     {
-        $mainFocus = self::getMainFocus();
-        return self::getMenu( $mainFocus );
+        $mainKey = self::getMainKey();
+        if ( !$mainKey ) {
+            return array();
+        }
+        return self::getMenu( $mainKey );
     }
 
     /**
      *  取得 focus 的 sub menu
      *
-     *  @return array or false
+     *  @return array or empty array
      */
     static public function getSub()
     {
-        $mainFocus = self::getMainFocus();
-        $subFocus  = self::getSubFocus();
-        if ( !$mainFocus || !$subFocus ) {
-            return false;
+        $mainKey = self::getMainKey();
+        $subKey  = self::getSubKey();
+        if ( !$mainKey || !$subKey ) {
+            return array();
         }
 
-        $menu = self::getMenu( $mainFocus );
+        $menu = self::getMenu( $mainKey );
         foreach ( $menu['sub'] as $sub ) {
-            if ( $sub['key'] === $subFocus ) {
+            if ( $sub['key'] === $subKey ) {
                 return $sub;
             }
         }
-        return false;
+        return array();
     }
 
     /**
-     *  取得排序過後的 menu
+     *  
      */
-    static public function getOrderMenu()
+    static public function getAllMenu()
     {
-        // 未排序
         return self::$_options;
     }
 
-
 }
+

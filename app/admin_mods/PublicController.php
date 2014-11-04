@@ -5,8 +5,6 @@ class PublicController extends Phalcon\Mvc\Controller
 
     public function initialize()
     {
-        // parent::initialize();
-
         // disabled layout, use action view
         $this->view->setRenderLevel(\Phalcon\Mvc\View::LEVEL_LAYOUT);
 

@@ -14,7 +14,16 @@
             <?php echo block('Navigation'); ?>
         </nav>
         <div class="container">
-            <?php echo $this->getContent() ?>
+
+            <div class="row">
+                <div class="col-md-2">
+                    <?php echo block('SubMenu'); ?>
+                </div>
+                <div class="col-md-10">
+                    <?php echo $this->getContent() ?>
+                </div>
+            </div>
+
         </div>
     </body>
 </html>
