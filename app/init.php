@@ -55,9 +55,6 @@ $factoryApplication = function()
     // start and get application
     $app = require( $appPath .'/'. APP_PORTAL . '_mods/setting/start.php' );
 
-    SessionBrg::init();
-    CookiesBrg::init();
-
     // url() helper function
     RegisterManager::set('url', $app->url );
 
@@ -65,29 +62,21 @@ $factoryApplication = function()
     LogBrg::init(   APP_BASE_PATH .'/var/log/'   );
     CacheBrg::init( APP_BASE_PATH .'/var/cache/' );
 
-    /**
-     *  zend loader
-     */
-    $zendLoader = function()
-    {
-        require_once APP_BASE_PATH . '/app/vendors/Zend/Loader/StandardAutoloader.php';
-        
-        $loader = new Zend\Loader\StandardAutoloader(array(
-            'autoregister_zf' => true,
-            'namespaces' => array(
-                'Ydin'    => APP_BASE_PATH . '/app/vendors/Ydin',
-                'Imagine' => APP_BASE_PATH . '/app/vendors/Imagine',
-            ),
-        ));
-        $loader->register();
+
+    // custom
+    $customLoader = function($appPath) {
+        require( $appPath .'/'. APP_PORTAL . '_mods/setting/custom.php' );
     };
-    $zendLoader();
+    $customLoader($appPath);
+    unset($customLoader);
+
 
     // event init
     Ydin\Event::init( APP_BASE_PATH . '/app/event' );
 
     // init footer
     Ydin\Event::notify('init_footer', array('app'=>$app) );
+
 
     return $app;
 };

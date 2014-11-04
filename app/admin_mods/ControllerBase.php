@@ -5,6 +5,10 @@ class ControllerBase extends Phalcon\Mvc\Controller
 
     protected function initialize()
     {
+        if ( !UserIdentity::isLogin() ) {
+            $this->redirect('');
+        }
+
         RegisterManager::set('title','Gear Admin');
 
         $this->assets
