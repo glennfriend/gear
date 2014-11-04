@@ -3,6 +3,7 @@ header('Content-Type: text/html; charset=utf-8');
 define('APP_PORTAL','admin');
 require_once '../../app/init.php';
 
+
 try {
     $app = $factoryApplication();
     echo $app->handle()->getContent();
@@ -12,5 +13,4 @@ try {
     echo nl2br(htmlentities( $e->getTraceAsString() ));
 }
 
-echo 'xx';
 //

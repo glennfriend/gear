@@ -9,9 +9,9 @@
     // url
     $di->set('escaper', new Phalcon\Escaper );
     $di->set('url', new Phalcon\Mvc\Url );
-    $di->get('url')->setBaseUri( APP_HOME_URI .'/' );
+    $di->get('url')->setBaseUri( APP_ADMIN_URI .'/' );
     UrlManager::init(array(
-        'baseUri' => APP_HOME_URI
+        'baseUri' => APP_ADMIN_URI
     ));
 
 

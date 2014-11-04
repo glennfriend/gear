@@ -20,8 +20,8 @@ class PublicController extends ControllerBase
     {
         $userIdentity = new UserIdentity();
         if( $userIdentity->isLogin() ) {
-            $this->redirect( $this->createUrl('/dashboard') );
-            exit;
+            $this->redirect('dashboard');
+            return;
         }
 
         $account  = trim(strip_tags( InputBrg::get('account') ));
@@ -31,7 +31,8 @@ class PublicController extends ControllerBase
 
             if( $userIdentity->authenticate( $account, $password ) ) {
                 // 登入成功
-                $this->redirect( $this->createUrl('/dashboard') );
+                $this->redirect('dashboard');
+                return;
             }
             else {
                 // 帳號或密碼錯誤
@@ -51,6 +52,7 @@ class PublicController extends ControllerBase
     {
         UserIdentity::logout();
         $this->redirect('/');
+        return;
     }
 
 
