@@ -1,0 +1,82 @@
+<?php
+
+    $this->label = $this->_formPage->getName() .' Content Edit';
+
+    $fields = $this->_formPage->getProperty('fields');
+    $contents = $formContent->getContents();
+
+?>
+
+<form class="well" method="post">
+
+    <div class="row">
+        <div class="col-md-4">
+
+            <?php
+                foreach( $fields as $item ) {
+
+                    $key = $item['field'];
+                    $value = '';
+                    if( isset($contents[$key]) ) {
+                        $value = $contents[$key];
+                    }
+
+                    $html = '';
+                    switch( $item['type'] ) {
+                        case 'radio':
+                            foreach( $item['format'] as $option ) {
+                                $firstItem = '';
+                                if( $value == $option ) {
+                                    $firstItem = ' checked="checked" ';
+                                }
+                                $html .= '
+                                    <label class="radio">
+                                        <input type="radio" name="'. $item['field'] .'" value="'. $option .'" '. $firstItem .' />'. $option .'
+                                    </label>';
+                            }
+                        break;
+                        case 'textarea':
+                            $html .= '<textarea name="'. $item['field'] .'" class="form-control" rows="6" >'. $value .'</textarea>';
+                        break;
+                        default:
+                            $html .= '<input type="text" name="'. $item['field'] .'" value="'. escape($value) .'" class="form-control" />';
+                    }
+            ?>
+                <div class="form-group">
+                    <label><?php echo $key; ?></label>
+                    <?php echo $html; ?>
+                </div>
+            <?php 
+                }
+            ?>
+
+        </div>
+        <div class="col-md-4">
+
+            <?php if( $formContent->getUserId() ): ?>
+                <div class="form-group">
+                    <label>建立者</label>
+                    <?php $user = $formContent->getUser(); ?>
+                    <input type="text" class="form-control" value="<?php echo $user->getAccount(); ?>" disabled="disabled" />
+                </div>
+            <?php endif; ?>
+
+            <div class="form-group">
+                <label>建立日期</label>
+                <input type="text" class="form-control" value="<?php echo cc('datetime',$formContent->getCreateTime()); ?>" disabled="disabled" />
+            </div>
+
+        </div>
+        <div class="col-md-4">
+        </div>
+
+    </div>
+
+    <div>
+        <input type="hidden" name="formPageId"    value="<?php echo $this->_formPage->getId(); ?>"  />
+        <input type="hidden" name="formContentId" value="<?php echo $formContent->getId(); ?>"      />
+        <button type="submit" class="btn btn-primary">Save</button>
+    </div>
+
+</form>
+

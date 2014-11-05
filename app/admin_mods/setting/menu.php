@@ -36,6 +36,23 @@
         )
     ));
 
+    // 表單
+    MenuManager::addOption(array(
+        'main' => array(
+            'key'   => 'formpage',
+            'link'  => url('formpage'),
+            'role'  => $roles['lowest'],
+        ),
+        'sub' => array(
+            array(
+                'key'   => 'formpage',
+                'label' => 'list',
+                'link'  => url('formPage'),
+                'role'  => $roles['lowest'],
+            )
+        )
+    ));
+
     // 系統功能
     MenuManager::addOption(array(
         'main' => array(

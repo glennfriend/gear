@@ -1,0 +1,70 @@
+<?php
+
+    $this->label = $formPage->getName() .' 設定';
+
+    $fields = $formPage->getProperty('fields');
+    if( !$fields ) {
+
+        $content = <<<EOD
+// 該欄位內容是空的!!
+
+// 如果這是令你意外的訊息, 可能是格式錯誤, 請不要儲存, 如果是新的表單, 請參考以下格式:
+// 英文欄位 ; 中文標題 ; 顯示格式 ; 顯示資料
+
+// sample 
+type      ; 問題類型 ; radio ; 合作提案,給我們的建議,網站有問題
+email     ; 連絡 Email
+telephone ; 連絡電話
+topic     ; 主題
+content   ; 內容
+EOD;
+
+    }
+    else {
+
+        $content = "// 格式: \n// 英文欄位 ; 中文標題 ; 顯示格式 ; 顯示資料\n\n";
+        foreach( $fields as $field ) {
+            $line = $field['field'] . ' ; ' . $field['topic'] . ' ; ';
+            if( $field['type'] ) {
+                $line .= $field['type'];
+            }
+            $line .= ' ; ';
+            if( $field['format'] ) {
+                $line .= join(",",$field['format']);
+            }
+
+            $content .= trim($line,' ;') . "\n";
+        }
+
+    }
+
+?>
+
+<div class="page-header">
+    <h3>表單項目編輯</h3>
+</div>
+
+<form name="form-index" id="form-index" method="post">
+
+    <div class="form-group">
+        <!-- <label for="content">表單項目編輯</label> -->
+        <textarea class="form-control" id="content" name="content" rows="16" style="font-family:Consolas"><?php echo $content; ?></textarea>
+        <?php if( $message = FormMessageManager::getFieldMessage('content') ) {
+            echo '<p class="help-block">'. $message .'</p>';
+        } ?>
+    </div>
+
+    <input type="hidden" name="formPageId" value="<?php echo $formPage->getId(); ?>" />
+    <button type="submit" id="submitButton" class="btn btn-primary" disabled="disabled" >Save</button>
+
+</form>
+
+<script type="text/javascript">
+    $(function() {
+
+        $("#content").on("keydown",function(){
+            $("#submitButton").attr("disabled",false);
+        });
+
+    });
+</script>

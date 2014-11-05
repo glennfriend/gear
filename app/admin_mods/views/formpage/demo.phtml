@@ -1,0 +1,64 @@
+<?php
+
+    $fields = $formPage->getProperty('fields') 
+                ? $formPage->getProperty('fields') 
+                : array();
+
+    $output = '';
+    foreach( $fields as $item ) {
+
+        $content = '';
+
+        switch( $item['type'] ) {
+            case 'select':
+                $content .= '<select name="'. $item['field'] .'" class="form-control">';
+                foreach( $item['format'] as $option ) {
+                    $content .=<<<EOD
+                        <option value="{$option}">{$option}</option>
+EOD;
+                }
+                $content .= '</select>';
+            break;
+            case 'radio':
+                foreach( $item['format'] as $option ) {
+                    $content .=<<<EOD
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="{$item['field']}" value="{$option}" /> {$option}
+                            </label>
+                        </div>
+EOD;
+                }
+            break;
+            case 'textarea':
+                $content .=<<<EOD
+                        <textarea name="{$item['field']}" class="form-control" ></textarea>
+EOD;
+            break;
+            default:
+                $content .=<<<EOD
+                        <input type="text" name="{$item['field']}" class="form-control" placeholder="{$item['topic']}">
+EOD;
+        }
+        
+        $output .=<<<EOD
+            <div class="form-group">
+                <label>{$item['topic']}</label>
+                {$content}
+            </div>
+EOD;
+        
+    }
+
+    $output = '<div>'. $output .'</div>';
+?>
+
+
+<form class="well" method="post">
+    <div class="row">
+        <div class="col-md-12">
+            <?php echo $output; ?>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </div>
+</form>

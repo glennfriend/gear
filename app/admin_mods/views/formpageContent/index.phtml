@@ -1,0 +1,106 @@
+<?php
+
+    $this->label = $formPage->getName() .' Form';
+
+    $deleteLink = url('formpageContent/delete');
+    $fields = $formPage->getProperty('fields')
+                ? $formPage->getProperty('fields')
+                : array();
+    $fieldCount = 0;
+?>
+
+<script type="text/javascript" charset="utf-8">
+    "use strict";
+    $(function() {
+        // checkbox all
+        aid.event.checkboxAll('#chooseItemsAll');
+    });
+</script>
+
+<div class="page-header">
+    <form name="form-search" id="form-search" class="form-inline" method="get">
+        <?php foreach( $fields as $field ) {
+            switch( $field['type'] ) {
+                case 'radio':
+                    echo '<div class="form-group">';
+                    echo     '<select class="form-control" name="customSearch['. $field['field'] .']">';
+                    echo     '<option value="">所有的『'. $field['topic'] .'』</option>';
+                    foreach( $field['format'] as $option ) {
+                        echo '<option value="'. $option .'">'. $option .'</option>';
+                    }
+                    echo     '</select>';
+                    echo '</div> ';
+                break;
+                default:
+                    echo '<div class="form-group">';
+                    echo     '<input type="text" class="form-control" placeholder="'. $field['topic'] .'" name="customSearch['. $field['field'] .']" value="" /> ';
+                    echo '</div> ';
+            }
+        } ?>
+        <input type="hidden" name="formPageId" value="<?php echo $formPage->getId(); ?>" />
+        <button type="submit" class="btn btn-primary">搜尋</button>
+    </form>
+</div>
+
+<form name="form-index" id="form-index" method="post" action="<?php echo $deleteLink; ?>">
+
+    <table id="table-index" class="table table-bordered table-striped table-condensed">
+        <thead>
+            <tr>
+                <th style="width:15px;"><input class="checkbox" type="checkbox" id="chooseItemsAll" value="1" /></th>
+                <th style="width:15px;">id</th>
+                <?php foreach( $fields as $field ) {
+                    echo '<th>'. $field['topic'] .'</th>';
+                    $fieldCount++;
+                } ?>
+                <th>建立日期</th>
+                <th>管理</th>
+            </tr>
+        </thead>
+        <tbody>
+        <?php
+
+            foreach( $formContents as $formContent ) {
+                $contents = $formContent->getContents();
+                $editLink = url('formpageContent/edit', Array(
+                    'formPageId'    => $formPage->getId(),
+                    'formContentId' => $formContent->getId(),
+                ));
+                echo '<tr>';
+                echo    '<th><input class="checkbox" type="checkbox" name="chooseItems[]" value="'. $formContent->getId() .'"></th>';
+                echo    '<td>'. $formContent->getId() .'</td>';
+
+                foreach( $fields as $field ) {
+                    $value = '';
+                    if( isset($contents[ $field['field'] ]) ) {
+                        $value = $contents[ $field['field'] ];
+                    }
+                    echo '<td>'. $value .'</td>';
+                }
+
+                echo    '<td>'. cc('date',$formContent->getCreateTime()) .'</td>';
+                echo    '<td>';
+                echo        '<a href="'. $editLink .'"><div class="fam-pencil"></div>編輯</a>';
+                echo    '</td>';
+                echo '</tr>';
+            }
+        ?>
+        </tbody>
+        <tfoot>
+            <tr>
+                <th colspan="<?php echo $fieldCount+4; ?>">
+                    <div style="float:left">
+                    </div>
+                    <div style="float:right">
+                        <input type="hidden" name="formPageId" value="<?php echo $formPage->getId(); ?>" />
+                        <button class="btn btn-danger">Delete</button>
+                    </div>
+                </th>
+            </tr>
+        </tfoot>
+    </table>
+
+    <?php echo cc('displayPageLimit', $pageLimit ); ?>
+
+</form>
+
