@@ -38,3 +38,8 @@ php.ini add extension
         cat install | col -b > install.new ; chmod +x install.new
 
 
+檢查 php-cli 有否載入 phalcon
+
+    php -i | grep "phalcon"
+
+

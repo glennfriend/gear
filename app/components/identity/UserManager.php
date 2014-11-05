@@ -52,7 +52,7 @@ class UserManager
         if( !$myself ) {
             return false;
         }
-        return $myself->hasPermission( array('developer') );
+        return $myself->hasPermission( array('role-developer') );
     }
 
     /**
@@ -65,7 +65,7 @@ class UserManager
         if( !$myself ) {
             return false;
         }
-        return $myself->hasPermission( array('manager','developer') );
+        return $myself->hasPermission( array('role-manager','role-developer') );
     }
 
     /**

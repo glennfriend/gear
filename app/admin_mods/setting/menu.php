@@ -15,17 +15,23 @@
         ),
         'sub' => array(
             array(
-                'key'   => 'board1',
-                'label' => 'board1 by visit 未設定無限寬度',
+                'key'   => 'dashboard1',
+                'label' => 'Dashboard by visit',
                 'link'  => url('dashboard'),
                 'role'  => $roles['lowest'],
             ),
             array(
-                'key'   => 'board2',
-                'label' => 'board2 by manager 未設定顯示權限',
-                'link'  => url('dashboard',array('display'=>'advanced')),
+                'key'   => 'dashboard2',
+                'label' => 'Dashboard by manager 未設定顯示權限',
+                'link'  => url('dashboard/advanced',array('display'=>'advanced')),
                 'role'  => $roles['manager'],
-            )
+            ),
+            array(
+                'key'   => 'dashboard3',
+                'label' => 'Dashboard by nothing',
+                'link'  => url('dashboard/nothing'),
+                'role'  => '不存在的權限',
+            ),
         )
     ));
 
