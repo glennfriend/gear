@@ -47,7 +47,7 @@
             array(
                 'key'   => 'formpage',
                 'label' => 'list',
-                'link'  => url('formPage'),
+                'link'  => url('formpage'),
                 'role'  => $roles['lowest'],
             )
         )

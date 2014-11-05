@@ -126,9 +126,7 @@ class FormpageContentController extends ControllerBase
         $chooseItems = InputBrg::post('chooseItems');
         if( !$chooseItems ) {
             FormMessageManager::addErrorResultMessage('You not choose any item');
-            // TODO: 必須修正
-            $url = 'formpageContent?formPageId='. $this->_formPage->getId();
-            $this->redirect( $url );
+            $this->redirect( 'formpageContent', array('formPageId'=>$this->_formPage->getId()) );
             return;
         }
 
@@ -152,9 +150,7 @@ class FormpageContentController extends ControllerBase
             FormMessageManager::addErrorResultMessage('無法刪除('. join(', ',$failIds) .')');
         }
 
-        // TODO: 必須修正
-        $url = 'formpageContent?formPageId='. $this->_formPage->getId();
-        $this->redirect( $url );
+        $this->redirect( 'formpageContent', array('formPageId'=>$this->_formPage->getId()) );
     }
 
 }
