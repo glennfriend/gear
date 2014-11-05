@@ -1,0 +1,32 @@
+<?php
+
+    $version = '?';
+    if ( function_exists('gearman_version') ) {
+        $version = gearman_version();
+    }
+
+    $isLoaded = 'No';
+    if ( extension_loaded('gearman') ) {
+        $isLoaded = 'Yes';
+    }
+
+?>
+
+    <h1><?php echo $label; ?></h1>
+    <hr/>
+
+    <div class="form-group">
+        <label for="">Load Gearman extension</label>
+        <input type="text" class="form-control" value="<?php echo $isLoaded; ?>" readonly="readonly">
+    </div>
+
+    <div class="form-group">
+        <label for="">Gearman version</label>
+        <input type="text" class="form-control" value="<?php echo $version; ?>" readonly="readonly">
+    </div>
+
+    <div class="form-group">
+        <label for="">ps ax | grep gearmand</label>
+        <input type="text" class="form-control" value="<?php echo exec('ps ax | grep gearmand'); ?>" readonly="readonly">
+    </div>
+

@@ -1,8 +1,9 @@
 <?php
 
     $roles = array(
-        'lowest'  => 'visit',
-        'manager' => 'manager',
+        'lowest'    => 'role-visit',
+        'manager'   => 'role-manager',
+        'developer' => 'role-developer',
     );
 
     // Dashboard
@@ -38,7 +39,8 @@
     // 系統功能
     MenuManager::addOption(array(
         'main' => array(
-            'key'   => 'system',
+            'key'   => 'systemic',
+            'label' => 'System Information',
             'link'  => url('systemic/config'),
             'role'  => $roles['manager'],
         ),

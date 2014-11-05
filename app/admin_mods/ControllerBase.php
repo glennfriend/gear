@@ -72,7 +72,6 @@ class ControllerBase extends Phalcon\Mvc\Controller
     {
         // 重定向不會禁用視圖組件。因此視圖將正常顯示。你可以使用 $this->view->disable() 禁用視圖輸出。
         $this->view->disable();
-
         $this->response->redirect( $route );
         return;
     }

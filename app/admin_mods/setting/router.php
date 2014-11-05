@@ -11,16 +11,6 @@
         'action'     => 'index',
     ));
 
-    // not found - 開發時請關閉
-    /*
-    $router->notFound(array(
-        "controller" => 'error',
-        "action"     => 'index'
-    ));
-    return $router;
-    */
-
-
 /*
     // try product page
     $router->add('/([a-z0-9]+\.html)', array(

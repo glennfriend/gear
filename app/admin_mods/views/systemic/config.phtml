@@ -1,0 +1,37 @@
+
+    <h1><?php echo $label; ?></h1>
+    <hr/>
+    <p>
+        儲存設定之後, 會將 system cache 一併清除
+    </p>
+
+    <form name="form-setting" id="form-setting" class="well" method="post">
+
+        <div class="row">
+            <?php foreach( $configs as $config ): ?>
+            <?php
+                if( !$config->getDisplay() ) {
+                    continue;
+                }
+                $key = $config->getKey();
+            ?>
+                <div class="col-md-12">
+                    <label><?php echo $config->getName(); ?></label>
+                    <div class="form-group">
+                        <input type="text" class="form-control" 
+                            name="<?php echo $key; ?>" 
+                            value="<?php echo $config->getValue(); ?>" 
+                            placeholder="<?php echo $config->getDescription(); ?>" />
+                        <?php if( UserManager::isDeveloper() ) { echo $key; } ?>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+
+            <div class="col-md-12">
+                <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+
+        </div>
+
+    </form>
+
