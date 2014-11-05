@@ -1,6 +1,6 @@
 <?php
-    $homeUri    = url('');
     $logoutUri  = url('public/logout');
+    $userUri    = url('me');
     $user       = UserManager::getUser();
     $userName   = $user->getAccount();
 ?>
@@ -19,8 +19,8 @@
             <ul class="nav navbar-nav">
                 <!--
                     <li class="active">Home</li>
+                    <li><a href="">Home</a></li>
                 -->
-                <li><a href="<?php echo $homeUri; ?>">Home</a></li>
                 <?php
                     foreach( MenuManager::getAllMenu() as $menu ) {
                         $label = $menu['main']['label'];
@@ -39,7 +39,7 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Setting <b class="caret"></b></a>
                     <ul class="dropdown-menu"><li class="dropdown-header">User</li>
-                        <li><a href="javascript:;"><?php echo $userName;?></a></li>
+                        <li><a href="<?php echo $userUri; ?>"><?php echo $userName;?></a></li>
                         <li class="dropdown-header">Status</li>
                         <li><a href="<?php echo $logoutUri;?>">Logout</a></li>
                     </ul>

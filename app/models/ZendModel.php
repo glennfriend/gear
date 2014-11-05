@@ -133,7 +133,7 @@ class ZendModel
         //
         Ydin\Event::notify('sql_execute_before', array(
             'adapter' => $adapter,
-            'select'  => $select,
+            'write'   => $write,
         ));
 
         $this->error = null;

@@ -40,7 +40,6 @@
     MenuManager::addOption(array(
         'main' => array(
             'key'   => 'systemic',
-            'label' => 'System Information',
             'link'  => url('systemic/config'),
             'role'  => $roles['manager'],
         ),
