@@ -19,7 +19,7 @@
         "use strict";
 
         /**
-         *  1 and 0 切換
+         *  chagen value to next
          */
         function changeValue( obj, itemString )
         {
@@ -49,6 +49,7 @@
                 }
             }
 
+
             if ( nextValue !== 0 ) {
                 $.cookie(obj.value, nextValue);
             }
@@ -69,7 +70,7 @@
          */
         function reflashMasterCookies()
         {
-            var data = <?php echo json_encode(getList()); ?>;
+            var data      = <?php echo json_encode(getList()); ?>;
             var whitelist = <?php echo json_encode(getKeywordList()); ?>;
             
             var html = '';
@@ -111,25 +112,10 @@
             display2.innerHTML = '<ul>'+ html +'</ul>';
         }
 
+        /**
+         *  in_array by phpjs
+         */
         function in_array (needle, haystack, argStrict) {
-            // Checks if the given value exists in the array  
-            // 
-            // version: 1109.2015
-            // discuss at: http://phpjs.org/functions/in_array
-            // +   original by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)
-            // +   improved by: vlado houba
-            // +   input by: Billy
-            // +   bugfixed by: Brett Zamir (http://brett-zamir.me)
-            // *     example 1: in_array('van', ['Kevin', 'van', 'Zonneveld']);
-            // *     returns 1: true
-            // *     example 2: in_array('vlado', {0: 'Kevin', vlado: 'van', 1: 'Zonneveld'});
-            // *     returns 2: false
-            // *     example 3: in_array(1, ['1', '2', '3']);
-            // *     returns 3: true
-            // *     example 3: in_array(1, ['1', '2', '3'], false);
-            // *     returns 3: true
-            // *     example 4: in_array(1, ['1', '2', '3'], true);
-            // *     returns 4: false
             var key = '',
                 strict = !! argStrict;
 
@@ -146,7 +132,6 @@
                     }
                 }
             }
-
             return false;
         }
 
@@ -167,11 +152,12 @@
     function getList()
     {
         return array(
-            'isSwitch1' => array(1,0),
-            'isSwitch2' => array(1,0),
-            'isSwitch3' => array(1,0),
-            'atDebug'   => array('all','important',0),
-            'atColor'   => array('red','green','blue',0),
+            'isSwitch1'         => array(1,0),
+            'isSwitch2'         => array(1,0),
+            'isSwitch3'         => array(1,0),
+            'atDebug'           => array('all','important',0),
+            'atColor'           => array('red','green','blue',0),
+            'cookie_phone_num'  => array('test-only',0),
         );
     }
 
