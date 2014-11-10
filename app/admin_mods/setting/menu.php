@@ -45,8 +45,8 @@
         ),
         'sub' => array(
             array(
-                'key'   => 'formpage',
-                'label' => 'list',
+                'key'   => 'list',
+                'label' => 'List all Form',
                 'link'  => url('formpage'),
                 'role'  => $roles['lowest'],
             )

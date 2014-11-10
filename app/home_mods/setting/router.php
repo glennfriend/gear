@@ -11,6 +11,17 @@
         'action'     => 'index',
     ));
 
+    $router->add('/form-want-tah', array(
+        'controller' => 'formpageWantTah',
+        'action'     => 'form',
+    ));
+    $router->add('/form-want-tah-submit', array(
+        'controller' => 'formpageWantTah',
+        'action'     => 'formSubmit',
+    ));
+
+
+
     // page not found
     $router->notFound(array(
         "controller" => 'error',

@@ -16,7 +16,7 @@
  */
 function ccHelper_appConfig( $type='public' )
 {
-    if ( !in_array( $type, array('private','public') ) {
+    if ( !in_array($type, array('private','public')) ) {
         return;
     }
 

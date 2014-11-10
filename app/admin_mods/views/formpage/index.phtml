@@ -26,7 +26,6 @@
     <table id="table-index" class="table table-striped table-condensed table-bordered">
         <thead>
             <tr>
-                <th style="width:15px;"><input class="checkbox" type="checkbox" id="chooseItemsAll" value="1" /></th>
                 <th>id</th>
                 <th>表單名稱</th>
                 <th>keyword</th>
@@ -42,7 +41,6 @@
             $demoLink    = url('formpage/demo', array('formPageId'=>$formPage->getId()));
           //$demoLink    = url('public/formPage', Array('formPageId'=>$formPage->getId()));
             echo '<tr>';
-            echo    '<th><input class="checkbox" type="checkbox" name="chooseItems[]" value="'. $formPage->getId() .'"></th>';
             echo     '<td>'. $formPage->getId() .'</td>';
             echo     '<td>';
             echo         '<a href="'. $showLink .'"><div class="fam-application-go"></div>'. $formPage->getName() .'</a>';
@@ -58,8 +56,8 @@
             echo     '</td>';
             echo     '<td>'. cc('date',$formPage->getCreateTime()) .'</td>';
             echo     '<td>';
-            echo         '<a href="'. $settingLink .'"><div class="fam-cog"></div>設定</a> ';
-            echo         '<a href="'. $demoLink    .'"><div class="fam-book-open"></div>Demo</a> ';
+            echo         '<a href="'. $settingLink .'"><span class="fam-cog"></span>設定</a> | ';
+            echo         '<a href="'. $demoLink    .'"><span class="fam-book-open"></span>Demo</a> ';
             echo     '</td>';
             echo '</tr>';
         } ?>

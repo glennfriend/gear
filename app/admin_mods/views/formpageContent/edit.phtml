@@ -1,8 +1,8 @@
 <?php
 
-    $this->label = $this->_formPage->getName() .' Content Edit';
+    $label = $formPage->getName() .' Content Edit';
 
-    $fields = $this->_formPage->getProperty('fields');
+    $fields = $formPage->getProperty('fields');
     $contents = $formContent->getContents();
 
 ?>
@@ -73,7 +73,7 @@
     </div>
 
     <div>
-        <input type="hidden" name="formPageId"    value="<?php echo $this->_formPage->getId(); ?>"  />
+        <input type="hidden" name="formPageId"    value="<?php echo $formPage->getId(); ?>"  />
         <input type="hidden" name="formContentId" value="<?php echo $formContent->getId(); ?>"      />
         <button type="submit" class="btn btn-primary">Save</button>
     </div>

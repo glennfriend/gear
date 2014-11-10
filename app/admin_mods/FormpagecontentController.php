@@ -67,10 +67,10 @@ class FormpageContentController extends ControllerBase
     /**
      *  edit
      */
-    public function editAction( $formPageId, $formContentId )
+    public function editAction()
     {
-        $formPageId    = (int) $formPageId;
-        $formContentId = (int) $formContentId;
+        $formPageId    = (int) inputBrg::get('formPageId');
+        $formContentId = (int) inputBrg::get('formContentId');
         $formContents = new FormContents();
         $formContent = $formContents->getFormContent($formContentId);
         if(!$formContent) {
@@ -102,7 +102,7 @@ class FormpageContentController extends ControllerBase
             else {
                 $formContents->updateFormContent($formContent);
                 FormMessageManager::addSuccessResultMessage('更新成功');
-                $this->redirect('formpageCntent', array(
+                $this->redirect('formpageContent', array(
                     'formPageId' => $this->_formPage->getId()
                 ));
                 return;
@@ -111,11 +111,10 @@ class FormpageContentController extends ControllerBase
         }
 
         // edit and update
-        $this->render( $this->getAction()->getId(), array(
+        $this->view->setVars(array(
             'formPage'      => $this->_formPage,
             'formContent'   => $formContent,
         ));
-
     }
 
     /**

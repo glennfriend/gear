@@ -1,0 +1,129 @@
+<?php
+
+    // submit url
+    $submitUrl = url('/form-want-tah-submit');
+
+?>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Language" content="zh-tw" />
+    <?php $this->assets->outputCss() ?>
+    <?php $this->assets->outputJs() ?>
+</head>
+<body>
+    <style type="text/css">
+        h5 {
+            color: #E57704;
+        }
+        #iWantTahWindowSuccessMessage {
+            color: #ff0000;
+            text-align: left;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 100px;
+            height: 50%;
+            display: none;
+        }
+        #iWantTahWindowMessage {
+            color: #ff0000;
+            min-height: 30px;
+        }
+    </style>
+
+    <div id="iWantTahWindowSuccessMessage" class="container-fluid"></div>
+    <div id="iWantTahWindowContent" class="container-fluid">
+
+        <h4>LET US KNOW IF YOU LIKE THIS DRESS!</h4>
+        <h5>This dress is not currently available for Try At Home. Please leave us your name & email if you would like to be notified when this dress becomes available.</h5>
+        <div id="iWantTahWindowMessage"></div>
+
+        <form class="form-horizontal well" id="formSubmitToWantTah" action="<?php echo $submitUrl; ?>" method="post">
+        <fieldset>
+
+            <input type="hidden" name="from_sku" value="<?php echo $from_sku; ?>" />
+
+            <!-- <label>Name</label> -->
+            <input type="text" name="name" placeholder="Your full name" /> *
+            <span class="help-block"></span>
+
+            <!-- <label>Email</label> -->
+            <input type="text" name="email" placeholder="Your email" /> *
+            <span class="help-block"></span>
+
+            <label>Wedding Date</label>
+            <input type="text" name="mm"   maxlength="2" style="width: 26px" placeholder="MM" />-
+            <input type="text" name="dd"   maxlength="2" style="width: 26px" placeholder="DD" />-
+            <input type="text" name="yyyy" maxlength="4" style="width: 52px" placeholder="YYYY" />
+            <span class="help-block"></span>
+
+            <!-- <label>Phone</label> -->
+            <input type="text" name="phone" maxlength="10" placeholder="Your phone" /> (Optional)
+            <span class="help-block"></span>
+
+            <input type="submit" id="iWantTahWindowSubmit" class="btn btn-primary" value="Submit" />
+
+        </fieldset>
+        </form>
+
+    </div>
+
+    <script type="text/javascript" charset="utf-8">
+        "use strict";
+
+        $(function() {
+
+            var iWantTahWindowValidate = function()
+            {
+                if ( !$("#formSubmitToWantTah input[name=name]").val() ) {
+                    $("#iWantTahWindowMessage").html('name field is required');
+                    return false;
+                }
+                if ( !$("#formSubmitToWantTah input[name=email]").val() ) {
+                    $("#iWantTahWindowMessage").html('email field is required');
+                    return false;
+                }
+                if (
+                    !$("#formSubmitToWantTah input[name=mm]").val() || 
+                    !$("#formSubmitToWantTah input[name=dd]").val() || 
+                    !$("#formSubmitToWantTah input[name=yyyy]").val() 
+                ) {
+                    $("#iWantTahWindowMessage").html('wedding date field is required');
+                    return false;
+                }
+
+                $("#iWantTahWindowMessage").html('');
+                return true;
+            }
+
+            $("#iWantTahWindowSubmit").bind('click',function(){
+                $.ajax({
+                    type: "POST",
+                    url: "<?php echo $submitUrl; ?>",
+                    data: $('#formSubmitToWantTah').serialize(),
+                    cache: false,
+                    dataType: 'json',
+                    beforeSend: iWantTahWindowValidate,
+                    complete: function(){},
+                    error: function(){},
+                    success: function(obj) {
+                        if ( obj.result ) {
+                            $("#iWantTahWindowSuccessMessage").html(obj.message);
+                            $("#iWantTahWindowSuccessMessage").show();
+                            $("#iWantTahWindowContent").hide();
+                        }
+                        else {
+                            $("#iWantTahWindowMessage").html(obj.message);
+                        }
+                    }
+                });
+                return false;
+            });
+
+        });
+
+    </script>
+
+</body>
+</html>

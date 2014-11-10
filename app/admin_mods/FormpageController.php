@@ -19,6 +19,7 @@ class FormpageController extends ControllerBase
      */
     public function indexAction()
     {
+        MenuManager::setSubKey('list');
 
         $page        = (int) inputBrg::get('page',1);
         $searchKey   = trim(strip_tags( inputBrg::get('searchKey') ));
