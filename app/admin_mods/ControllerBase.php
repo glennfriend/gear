@@ -13,6 +13,11 @@ class ControllerBase extends Phalcon\Mvc\Controller
 
         $this->assets
             ->addJs('dist/jquery/jquery-1.11.1.js')
+            ->addJs('dist/phpjs/phpjs.js')
+            ->addJs('dist/aid/aid.effect.js')
+            ->addJs('dist/aid/aid.event.js')
+            ->addJs('dist/aid/aid.ui.js')
+            ->addJs('dist/app.js')
             ->addJs('dist/bootstrap/js/bootstrap.js');
 
         $this->assets
