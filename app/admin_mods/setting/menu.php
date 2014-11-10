@@ -72,6 +72,11 @@
                 'role'  => $roles['manager'],
             ),
             array(
+                'key'   => 'phalcon',
+                'link'  => url('systemic/phalcon'),
+                'role'  => $roles['manager'],
+            ),
+            array(
                 'key'   => 'gearman',
                 'link'  => url('systemic/gearman'),
                 'role'  => $roles['manager'],

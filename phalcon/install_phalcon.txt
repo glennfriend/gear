@@ -38,6 +38,13 @@ php.ini add extension
         cat install | col -b > install.new ; chmod +x install.new
 
 
+安裝成功, 但無法載入, 可能的原因
+
+    如果有使用 phpbrew 而導致 php-fpm & php-cli 版本不同的話
+    可以先關閉 phpbrew off
+    在版本相同的情況下重新編譯
+
+
 檢查 php-cli 有否載入 phalcon
 
     php -i | grep "phalcon"

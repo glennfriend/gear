@@ -62,6 +62,14 @@ class SystemicController extends ControllerBase
         ));
     }
 
+    public function PhalconAction()
+    {
+        MenuManager::setSubKey('phalcon');
+        $this->view->setVars(Array(
+            'label' => 'Phalcon',
+        ));
+    }
+
     public function GearmanAction()
     {
         MenuManager::setSubKey('gearman');

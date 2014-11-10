@@ -4,7 +4,7 @@ error_reporting(E_ALL ^ E_NOTICE);
 ini_set('html_errors','Off');
 ini_set('display_errors','Off');
 
-if ( !in_array('phalcon', get_loaded_extensions() ) ) {
+if ( !extension_loaded('phalcon') ) {
     echo 'Framework Disabled';
     exit;
 }
