@@ -3,14 +3,14 @@
 class FormpageController extends ControllerBase
 {
 
-    public function initialize()
+    public function beforeExecuteRoute()
     {
-        parent::initialize();
+        parent::beforeExecuteRoute();
         MenuManager::setMainKey('formpage');
 
         if( !UserManager::isAdmin() ) {
             $this->redirectMainPage();
-            return;
+            return false;
         }
     }
 

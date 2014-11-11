@@ -5,27 +5,30 @@ class FormpageContentController extends ControllerBase
 
     protected $_formPage;
 
-    public function initialize()
+    /**
+     *
+     */
+    protected function beforeExecuteRoute()
     {
-        parent::initialize();
+        parent::beforeExecuteRoute();
         MenuManager::setMainKey('formpage');
 
         if( !UserManager::isAdmin() ) {
             $this->redirectMainPage();
-            return;
+            return false;
         }
 
         $formPageId = (int) InputBrg::get('formPageId');
         if( !$formPageId ) {
-            $this->redirect('formPage');
-            return;
+            $this->redirect('formpage');
+            return false;
         }
 
         $formPages = new FormPages();
         $formPage = $formPages->getFormPage( $formPageId );
         if( !$formPage ) {
-            $this->redirect('formPage');
-            return;
+            $this->redirect('formpage');
+            return false;
         }
 
         $this->_formPage = $formPage;

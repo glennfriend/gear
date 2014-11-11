@@ -3,9 +3,9 @@
 class MeController extends ControllerBase
 {
 
-    public function initialize()
+    public function beforeExecuteRoute()
     {
-        parent::initialize();
+        parent::beforeExecuteRoute();
         $this->user = UserManager::getUser();
     }
 

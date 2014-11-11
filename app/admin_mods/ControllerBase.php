@@ -5,10 +5,6 @@ class ControllerBase extends Phalcon\Mvc\Controller
 
     protected function initialize()
     {
-        if ( !UserIdentity::isLogin() ) {
-            $this->redirect('');
-        }
-
         RegisterManager::set('title','Gear Admin');
 
         $this->assets
@@ -24,26 +20,26 @@ class ControllerBase extends Phalcon\Mvc\Controller
             ->addCss('dist/bootstrap/css/bootstrap.css');
 
         logBrg::backend( $this->dispatcher->getControllerName(), $this->dispatcher->getActionName() );
-
     }
 
-    // This is executed before every found action
-    public function beforeExecuteRoute($dispatcher)
+    /**
+     *
+     */
+    protected function beforeExecuteRoute()
     {
-        /*
-        if ($dispatcher->getActionName() == 'index') {
-            $this->flash->error("hello all index");
-            exit;
-            //return false; ?????????
+        if ( !UserIdentity::isLogin() ) {
+            $this->redirect('');
+            return false;
         }
-        */
     }
 
-    // Executed after every found action
-    public function afterExecuteRoute($dispatcher)
-    {
-        
-    }
+    /**
+     *
+     */
+    // public function afterExecuteRoute($dispatcher)
+    // {
+    //     
+    // }
 
     /**
      *  forword
@@ -66,6 +62,7 @@ class ControllerBase extends Phalcon\Mvc\Controller
      */
     protected function redirectMainPage()
     {
+        $this->view->disable();
         $this->redirect('');
     }
 
@@ -75,6 +72,7 @@ class ControllerBase extends Phalcon\Mvc\Controller
      */
     protected function redirect( $route, $params=array() )
     {
+
         // 有參數的情況, route 要做一些調整
         // 由於 response 沒有吃參數, 所以要自己組好
         if ( $params ) {
@@ -83,7 +81,7 @@ class ControllerBase extends Phalcon\Mvc\Controller
             $route = $this->url->get( $route, $params );
             $this->url->setBaseUri( $baseUri );
         }
-    
+
         // 重定向不會禁用視圖組件。因此視圖將正常顯示。你可以使用 $this->view->disable() 禁用視圖輸出。
         $this->view->disable();
         $this->response->redirect( $route );

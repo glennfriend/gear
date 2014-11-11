@@ -3,9 +3,9 @@
 class DashboardController extends ControllerBase
 {
 
-    public function initialize()
+    public function beforeExecuteRoute()
     {
-        parent::initialize();
+        parent::beforeExecuteRoute();
         MenuManager::setMainKey('dashboard');
     }
 

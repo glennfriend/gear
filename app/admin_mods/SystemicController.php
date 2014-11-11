@@ -3,14 +3,14 @@
 class SystemicController extends ControllerBase
 {
 
-    public function initialize()
+    public function beforeExecuteRoute()
     {
-        parent::initialize();
+        parent::beforeExecuteRoute();
         MenuManager::setMainKey('systemic');
 
         if( !UserManager::isAdmin() ) {
             $this->redirectMainPage();
-            return;
+            return false;
         }
     }
 
