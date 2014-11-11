@@ -9,6 +9,10 @@
     </style>
     <script type="text/javascript" charset="utf-8" src="dist/jquery/jquery-1.11.1.js"></script>
     <script type="text/javascript" charset="utf-8" src="dist/jquery/jquery.cookie.js"></script>
+    <!--
+        http://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js
+        http://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js
+    -->
 </head>
 <body>
 
@@ -77,8 +81,9 @@
             for( var i=0; i<whitelist.length; i++ ) {
                 var key = whitelist[i].trim();
                 var value = $.cookie(key);
-                var param = data[key].join(',');
-                var show = '<input type="button" value="'+ key +'" onclick="changeValue(this,\''+ param +'\');" />';
+                var param = data[key].value.join(',');
+                var title = data[key].title;
+                var show = '<input type="button" title="'+ title +'" value="'+ key +'" onclick="changeValue(this,\''+ param +'\');" />';
                 if ( typeof value === 'undefined' ) {
                     value = '<span style="color:red">'+ value +'</span>';
                 }
@@ -149,15 +154,18 @@
 </html>
 <?php
 
+
     function getList()
     {
         return array(
-            'isSwitch1'         => array(1,0),
-            'isSwitch2'         => array(1,0),
-            'isSwitch3'         => array(1,0),
-            'atDebug'           => array('all','important',0),
-            'atColor'           => array('red','green','blue',0),
-            'cookie_phone_num'  => array('test-only',0),
+            'is_sb_cs' => array(
+                'value' => array(1,0),
+                'title' => 'can add to cart & buy'
+            ),
+            'cookie_phone_num' => array(
+                'value' => array('2223334444','1234567890',0),
+                'title' => 'show phone number about showroom'
+            ),
         );
     }
 
