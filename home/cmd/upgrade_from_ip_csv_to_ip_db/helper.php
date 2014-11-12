@@ -7,7 +7,7 @@ function checkSecurity()
 {
     $password = isset($_GET['password'])  ?  $_GET['password']  :  '';
     if ( '2000' !== $password ) {
-        die('empty');
+        die('Deny');
     }
 }
 

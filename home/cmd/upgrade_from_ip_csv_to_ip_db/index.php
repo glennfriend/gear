@@ -1,7 +1,4 @@
 <?php
-
-exit;
-
 /**
  *  從 ip2location.com 網站上下載的 ip location csv 檔案
  *  解析之後丟到資料庫的程式片段
@@ -59,16 +56,17 @@ perform( $isExec );
  */
 function perform( $isExec )
 {
-    /*
-    $csv = 'IP2LOCATION-LITE-DB11.CSV';
-    $allowImportCountries = array(
-        'us', 'uk', 'ca', 'au', 'sa', 'za', 'tw'
-    );
-    */
     $allowImportCountries = array(
         'us',
     );
     $csv = 'test.csv';
+    /*
+    $csv = 'IP2LOCATION-LITE-DB11.CSV';
+    $allowImportCountries = array(
+        'us', 'ca', 'au', 'sa', 'za', 'tw',
+        'gb', 'ie'  //英國 & 愛爾蘭
+    );
+    */
 
     if (($handle = fopen($csv, 'r')) !== false) {
 
@@ -141,7 +139,7 @@ EOD;
                 $affect = $results->count();
             }
             else {
-                if( $count > 30 ) {
+                if( $count >= 30 ) {
                     break;
                 }
             }
