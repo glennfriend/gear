@@ -23,10 +23,10 @@ class LogBrg
     /**
      *  developer log
      */
-    public static function custom( $content )
+    public static function custom( $logFile, $content )
     {
         $content = date("Y-m-d H:i:s") .' - ' . $content;
-        self::write( 'custom.log', $content );
+        self::write( $logFile, $content );
     }
 
     /**
@@ -34,7 +34,7 @@ class LogBrg
      */
     public static function error( $content )
     {
-        $content = date("Y-m-d H:i:s") .' - '. $_SERVER['REMOTE_ADDR'] . ' - '. $content;
+        $content = $_SERVER['REMOTE_ADDR'] .' - '. date("Y-m-d H:i:s") . ' - '. $content;
         /*
             $content = 'post '.    print_r($_POST, true)    . $content;
             $content = 'session '. print_r($_SESSION, true) . $content;
@@ -47,7 +47,7 @@ class LogBrg
      */
     public static function access( $content )
     {
-        $content = date("Y-m-d H:i:s") .' - '. $_SERVER['REMOTE_ADDR'] . ' - '. $content;
+        $content = $_SERVER['REMOTE_ADDR'] .' - '. date("Y-m-d H:i:s") . ' - '. $content;
         self::write( 'access.log', $content );
     }
 
@@ -56,9 +56,10 @@ class LogBrg
      */
     public static function frontend( $controller, $action )
     {
-        $content = date("Y-m-d H:i:s")
+        $content
+            = $_SERVER['REMOTE_ADDR']
             .' - '
-            . $_SERVER['REMOTE_ADDR']
+            . date("Y-m-d H:i:s")
             . ' - '
             . $controller
             . '/'
@@ -74,9 +75,10 @@ class LogBrg
      */
     public static function backend()
     {
-        $content = date("Y-m-d H:i:s")
+        $content 
+            = $_SERVER['REMOTE_ADDR']
             .' - '
-            . $_SERVER['REMOTE_ADDR']
+            . date("Y-m-d H:i:s")
             . ' - '
             . $_SERVER['REQUEST_URI'];
 
@@ -101,12 +103,12 @@ class LogBrg
      */
     public static function write( $file, $content )
     {
-        // TODO: please validate file name, only a-z & one dot(.) & no double dot (..)
-        // .......
+        if (!preg_match('/^[a-z0-9_\-\.]+$/i', $file)) {
+            return;
+        }
     
         $filename = self::$logPath .'/'. $file;
         file_put_contents( $filename, $content."\n", FILE_APPEND );
-
     }
 
 }
