@@ -67,7 +67,7 @@ class ZendModel
 
     static protected $adapter = null;
 
-    protected function getAdapter()
+    public function getAdapter()
     {
         if ( self::$adapter ) {
             return self::$adapter;
