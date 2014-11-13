@@ -228,7 +228,7 @@ class User extends BaseObject
 
     /**
      *  檢查是否有對應到任何其中一種的權限, 只要有一種符合就會回傳 true
-     *  代入值若為 `null` 或是 `空值` 則回傳 true
+     *  代入值若為 `null` 或是 `空值` 則回傳 false
      *
      *  @param string array, $permissions
      *  @return boolean

@@ -16,22 +16,16 @@
         ),
         'sub' => array(
             array(
-                'key'   => 'dashboard1',
-                'label' => 'Dashboard by visit',
+                'key'   => 'basic',
+                'label' => 'Dashboard',
                 'link'  => url('dashboard'),
                 'role'  => $roles['lowest'],
             ),
             array(
-                'key'   => 'dashboard2',
-                'label' => 'Dashboard by manager 未設定顯示權限',
+                'key'   => 'advanced',
+                'label' => 'Dashboard by manager',
                 'link'  => url('dashboard/advanced',array('display'=>'advanced')),
                 'role'  => $roles['manager'],
-            ),
-            array(
-                'key'   => 'dashboard3',
-                'label' => 'Dashboard by nothing',
-                'link'  => url('dashboard/nothing'),
-                'role'  => '不存在的權限',
             ),
         )
     ));

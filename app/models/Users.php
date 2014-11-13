@@ -172,7 +172,9 @@ class Users extends ZendModel
      *  get user role info
      *      雖然 user_roles 沒有 cache
      *      但是其實資料會儲存在 user object 之中
-     *      所以實際上是有 cache
+     *      所以實際上有 cache
+     *
+     *  ※所以當權限表改變之後, 所有 user 的權限必須要更新才行!!
      *
      *  @return rows array or empty array
      */

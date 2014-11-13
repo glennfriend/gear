@@ -6,6 +6,7 @@
     }
 
     $subKey = MenuManager::getSubKey();
+    $user = UserManager::getUser();
 
 ?>
 
@@ -15,6 +16,11 @@
                         <?php
                             $output = '';
                             foreach ( $mainMenu['sub'] as $sub ) {
+
+                                if ( !$user->hasPermission( array($sub['role']) ) ) {
+                                    continue;
+                                }
+
                                 if ( $sub['key'] === $subKey ) {
                                     $output .= '<a href="'. $sub['link'] .'" class="list-group-item active">'. $sub['label'] .'</a>'; 
                                 }
