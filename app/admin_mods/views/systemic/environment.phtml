@@ -33,9 +33,15 @@
                 <label for="">by "<?php echo ini_get('date.timezone'); ?>"</label>
                 <input type="text" class="form-control" value="<?php echo date("Y-m-d H:i:s (w)"); ?>" readonly="readonly">
             </div>
-
-            ※如果以上的 timezone 都相同, 表示該 "主機" 無法使用 ini_set() 命令
+            <span>※如果以上的 timezone 都相同, 表示該 "主機" 無法使用 ini_set() 命令</span>
 
         </div>
     </div>
+
+    <div class="form-group">
+        <label for="">Server API</label>
+        <input type="text" class="form-control" value="<?php echo php_sapi_name(); ?>" readonly="readonly">
+        
+    </div>
+    <span>※Apache *.* Handler => mod_php</span>
 
