@@ -27,6 +27,12 @@
                 'link'  => url('dashboard/advanced',array('display'=>'advanced')),
                 'role'  => $roles['manager'],
             ),
+            array(
+                'key'   => 'developer',
+                'label' => 'Dashboard by developer',
+                'link'  => url('dashboard/developer'),
+                'role'  => $roles['developer'],
+            ),
         )
     ));
 

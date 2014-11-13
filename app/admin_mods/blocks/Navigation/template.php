@@ -23,9 +23,16 @@
                 -->
                 <?php
                     foreach( MenuManager::getAllMenu() as $menu ) {
-                        $label = $menu['main']['label'];
-                        $link  = $menu['main']['link'];
-                        if ( $menu['main']['key'] === MenuManager::getMainKey() ) {
+                        $key    = $menu['main']['key'];
+                        $label  = $menu['main']['label'];
+                        $link   = $menu['main']['link'];
+                        $role   = $menu['main']['role'];
+
+                        if ( !$user->hasPermission( array($role) ) ) {
+                            continue;
+                        }
+
+                        if ( $key === MenuManager::getMainKey() ) {
                             echo '<li class="active"><a href="'. $link .'">'. $label .'</a></li>';
                         }
                         else {

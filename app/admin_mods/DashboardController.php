@@ -19,5 +19,10 @@ class DashboardController extends ControllerBase
         MenuManager::setSubKey('advanced');
     }
 
+    public function developerAction()
+    {
+        MenuManager::setSubKey('developer');
+    }
+
 
 }

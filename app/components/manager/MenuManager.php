@@ -6,7 +6,7 @@
 class MenuManager
 {
 
-    CONST LOWEST_ROLE = 'visit';
+    CONST LOWEST_ROLE = 'role-visit';
 
     /**
      *
@@ -46,11 +46,11 @@ class MenuManager
         }
 
         // auto setting role
-        if ( !isset($option['main']['label']) ) {
+        if ( !isset($option['main']['role']) ) {
             $option['main']['role'] = self::LOWEST_ROLE;
         }
         foreach ( $option['sub'] as $index => $sub ) {
-            if ( !isset($option['sub'][$index]['label']) ) {
+            if ( !isset($option['sub'][$index]['role']) ) {
                 $option['sub'][$index]['role'] = self::LOWEST_ROLE;
             }
         }

@@ -241,7 +241,10 @@ class User extends BaseObject
 
         $roleNames = $this->getRoleNames();
         foreach ( $askPermissions as $ask ) {
-            if ( $ask===null || $ask==='' || in_array($ask,$roleNames) ) {
+            if ( !$ask ) {
+                continue;
+            }
+            if ( in_array($ask,$roleNames) ) {
                 return true;
             }
         }
