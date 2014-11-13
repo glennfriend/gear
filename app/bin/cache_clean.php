@@ -1,7 +1,7 @@
 <?php
 header('Content-Type: text/html; charset=utf-8');
 define('APP_PORTAL','admin');
-require_once '../init.php';
+require_once dirname(dirname(__FILE__)).'/init.php';
 
 try {
     $app = $factoryApplication();
