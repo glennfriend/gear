@@ -21,7 +21,7 @@ class LogBrg
     }
 
     /**
-     *  developer log
+     *  developer custom log
      */
     public static function custom( $logFile, $content )
     {
@@ -83,6 +83,21 @@ class LogBrg
             . $_SERVER['REQUEST_URI'];
 
         self::write( 'backend.log', $content );
+    }
+
+    /**
+     *  backend login log
+     */
+    public static function backendLogin( $content )
+    {
+        $content
+            = $_SERVER['REMOTE_ADDR']
+            .' - '
+            . date("Y-m-d H:i:s")
+            . ' - '
+            . $content;
+
+        self::write( 'backend-login.log', $content );
     }
 
     /**

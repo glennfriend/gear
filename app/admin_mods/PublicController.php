@@ -54,12 +54,14 @@ class PublicController extends Phalcon\Mvc\Controller
 
             if( $userIdentity->authenticate( $account, $password ) ) {
                 // 登入成功
+                LogBrg::backendLogin("{$account} - login success");
                 $this->redirect('dashboard');
                 return;
             }
             else {
                 // 帳號或密碼錯誤
                 FormMessageManager::addErrorResultMessage('The password you entered is invalid. Check the field highlighted below and try again.');
+                LogBrg::backendLogin("{$account} - login fail");
             }
         }
 
@@ -73,7 +75,10 @@ class PublicController extends Phalcon\Mvc\Controller
      */
     public function logoutAction()
     {
+        $user = UserManager::getUser();
+        $account = $user->getAccount();
         UserIdentity::logout();
+        LogBrg::backendLogin("{$account} - logout");
         $this->redirect('');
         return;
     }
