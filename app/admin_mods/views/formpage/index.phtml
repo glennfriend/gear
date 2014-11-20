@@ -1,4 +1,8 @@
-
+<?php
+    $frontendUris = array(
+        1 => APP_HOME_URI . '/form-want-tah',
+    );
+?>
 <script type="text/javascript" charset="utf-8">
     "use strict";
     $(function() {
@@ -36,6 +40,13 @@
         </thead>
         <tbody>
         <?php foreach( $formPages as $formPage ) {
+
+            $frontendLink = (
+                isset($frontendUris[$formPage->getId()])
+                ? $frontendUris[$formPage->getId()]
+                : null
+            );
+
             $showLink    = url('formpageContent', array('formPageId'=>$formPage->getId()));
             $settingLink = url('formpage/setting', array('formPageId'=>$formPage->getId()));
             $demoLink    = url('formpage/demo', array('formPageId'=>$formPage->getId()));
@@ -56,8 +67,13 @@
             echo     '</td>';
             echo     '<td>'. cc('date',$formPage->getCreateTime()) .'</td>';
             echo     '<td>';
-            echo         '<a href="'. $settingLink .'"><span class="fam-cog"></span>設定</a> | ';
-            echo         '<a href="'. $demoLink    .'"><span class="fam-book-open"></span>Demo</a> ';
+            echo         '   <a href="'. $settingLink  .'"><span class="fam-cog"></span>設定</a>';
+            echo         ' | <a href="'. $demoLink     .'"><span class="fam-book-open"></span>Demo</a>';
+
+            if ( $frontendLink ) {
+                echo     ' | <a href="'. $frontendLink .'"><span class="fam-world-link"></span>Frontend</a> ';
+            }
+
             echo     '</td>';
             echo '</tr>';
         } ?>
