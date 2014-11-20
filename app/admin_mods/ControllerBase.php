@@ -17,7 +17,8 @@ class ControllerBase extends Phalcon\Mvc\Controller
             ->addJs('dist/bootstrap/js/bootstrap.js');
 
         $this->assets
-            ->addCss('dist/bootstrap/css/bootstrap.css');
+            ->addCss('dist/bootstrap/css/bootstrap.css')
+            ->addCss('dist/custom_with_famfamfam_icons/fam-icons.css');
 
         logBrg::backend( $this->dispatcher->getControllerName(), $this->dispatcher->getActionName() );
     }
