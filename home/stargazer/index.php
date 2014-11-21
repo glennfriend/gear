@@ -11,7 +11,7 @@ try {
 
 } catch( \Phalcon\Exception $e ) {
 
-    if ( !UserManager::isDeveloper() ) {
+    if ( !UserManager::isDeveloper() && 'dev'!==APP_ENVIRONMENT ) {
         echo "<h1>Page not found: 804001</h1>";
         exit;
     }

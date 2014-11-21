@@ -38,19 +38,6 @@
     //
     $di->set('dispatcher', new Phalcon\Mvc\Dispatcher );
 
-    //
-    /*
-    $di->set('db', function() {
-        return new Phalcon\Db\Adapter\Pdo\Mysql(array(
-            "host"      => APP_DB_MYSQL_HOST,
-            "username"  => APP_DB_MYSQL_USER,
-            "password"  => APP_DB_MYSQL_PASS,
-            "dbname"    => APP_DB_MYSQL_DB,
-        ));
-    });
-    */
-
-
     /*
     $di->set('cookies', function() {
         $cookies = new Phalcon\Http\Response\Cookies();
