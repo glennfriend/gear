@@ -1,7 +1,7 @@
 <?php
 
-    SessionBrg::init();
-    CookiesBrg::init();
+    SessionBrg::init($di);
+    CookiesBrg::init($di);
 
     /**
      *  zend loader

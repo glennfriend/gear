@@ -19,7 +19,8 @@ if ('dev'===APP_ENVIRONMENT) {
     ini_set('display_errors','On');
 }
 
-include 'helper.php';
+require_once('helper.php');
+
 
 /**
  *  init
@@ -62,12 +63,11 @@ $factoryApplication = function()
     LogBrg::init(   APP_BASE_PATH .'/var/log/'   );
     CacheBrg::init( APP_BASE_PATH .'/var/cache/' );
 
-
     // custom
-    $customLoader = function($appPath) {
+    $customLoader = function( $appPath, $di ) {
         require( $appPath .'/'. APP_PORTAL . '_mods/setting/custom.php' );
     };
-    $customLoader($appPath);
+    $customLoader($appPath, $app->getDi() );
     unset($customLoader);
 
 

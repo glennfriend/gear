@@ -4,38 +4,24 @@ class SessionBrg
 {
 
     /**
-     *  store session object
+     *  store di
      */
-    private static $session = array();
+    private static $di;
 
     /**
      *  session init
      */
-    public static function init()
+    public static function init( $di )
     {
         session_save_path( APP_BASE_PATH . '/var/session' );
-
-        /*
-        // cookie name ????
-        // session_name(APP_SHOP_COOKIE_NAME);
-
-        // 每次進來都重新變更 life time
-        if ( isset( $_COOKIE[APP_SHOP_COOKIE_NAME] ) ) {
-            setcookie(
-                APP_SHOP_COOKIE_NAME,
-                session_id( $_COOKIE[APP_SHOP_COOKIE_NAME] ),
-                time() + APP_LOGIN_LIFETIME,
-                "/"
-            );
-        }
-        */
 
         $session = new Phalcon\Session\Adapter\Files(array(
             'uniqueId' => APP_PRIVATE_DYNAMIC_CODE
         ));
         $session->start();
 
-        self::$session = $session;
+        $di->set('session', $session);
+        self::$di = $di;
     }
 
     /* --------------------------------------------------------------------------------
@@ -47,7 +33,7 @@ class SessionBrg
      */
     public static function get( $key, $defaultValue=null )
     {
-        $val = self::$session->get($key);
+        $val = self::$di->get('session')->get($key);
         if ( !$val && $defaultValue ) {
             return $defaultValue;
         }
@@ -63,7 +49,7 @@ class SessionBrg
      */
     public static function set( $key, $value )
     {
-        return self::$session->set( $key, $value );
+        return self::$di->get('session')->set( $key, $value );
     }
 
     /**
@@ -71,7 +57,7 @@ class SessionBrg
      */
     public static function remove( $key )
     {
-        self::$session->remove( $key );
+        self::$di->get('session')->remove( $key );
     }
 
     /**
@@ -79,7 +65,7 @@ class SessionBrg
      */
     public static function destroy()
     {
-        self::$session->destroy();
+        self::$di->get('session')->destroy();
     }
 
 }

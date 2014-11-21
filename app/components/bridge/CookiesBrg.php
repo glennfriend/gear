@@ -4,17 +4,28 @@ class CookiesBrg
 {
 
     /**
-     *  store cookie object
+     *  store di
      */
-    private static $cookie = array();
+    private static $di;
 
     /**
      *  cookie init
      */
-    public static function init()
+    public static function init( $di )
     {
-        self::$cookie = new Phalcon\Http\Response\Cookies();
-        self::$cookie->useEncryption(false);
+        $cookie = new Phalcon\Http\Response\Cookies();
+        $cookie->useEncryption(false);
+
+        $di->set('cookie', $cookie );
+        self::$di = $di;
+
+        self::set(
+            session_name(),
+            session_id(),
+            array(
+                'expire' => APP_CACHE_LIFETIME
+            )
+        );
     }
 
     /**
@@ -22,7 +33,7 @@ class CookiesBrg
      */
     public static function get($key)
     {
-        $value = self::$cookie->get( $key );
+        $value = self::$id->get('cookie')->get( $key );
         if ( !$value ) {
             return null;
         }
@@ -37,9 +48,10 @@ class CookiesBrg
      */
     public static function set($key, $value, $option=array() )
     {
+
         if ( is_array($option) ) {
-            if( $option['expire'] ) {
-                self::$cookie->set( $key, $value, time() + $option['expire'] );
+            if( isset($option['expire']) ) {
+                self::$di->get('cookie')->set( $key, $value, time() + $option['expire'] );
             }
             /*
             elseif( $option['expire'] && $option['path'] ) {
@@ -50,8 +62,6 @@ class CookiesBrg
             }
             */
         }
-
-        self::$cookie->set( $key, $value );
     }
 
     /**
@@ -59,7 +69,7 @@ class CookiesBrg
      */
     public static function remove($key)
     {
-        self::$cookie->delete( $key );
+        self::$id->get('cookie')->delete( $key );
     }
 
 }

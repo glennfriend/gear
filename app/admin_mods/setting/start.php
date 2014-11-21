@@ -38,24 +38,16 @@
     //
     $di->set('dispatcher', new Phalcon\Mvc\Dispatcher );
 
-    /*
-    $di->set('cookies', function() {
-        $cookies = new Phalcon\Http\Response\Cookies();
-        $cookies->useEncryption(false);
-        return $cookies;
-    });
-    */
-
-
+    //
     $di->set('router', function () {
         require APP_BASE_PATH . '/app/'. APP_PORTAL .'_mods/setting/router.php';
         return $router;
     });
 
-
+    //
     InputBrg::init($di);
 
-
+    //
     /*
         $translation = function()
         {
