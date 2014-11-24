@@ -8,12 +8,4 @@ class IndexController extends ControllerBase
         // $this->view->setVars();
     }
 
-/*
-    public function clearCartAction()
-    {
-        MageCart::clear();
-        $this->redirect('');
-    }
-*/
-
 }
