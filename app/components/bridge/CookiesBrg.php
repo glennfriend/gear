@@ -23,7 +23,7 @@ class CookiesBrg
             session_name(),
             session_id(),
             array(
-                'expire' => APP_CACHE_LIFETIME
+                'expire' => APP_LOGIN_LIFETIME
             )
         );
     }
