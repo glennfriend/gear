@@ -33,7 +33,7 @@
                 break;
                 default:
                     echo '<div class="form-group">';
-                    echo     '<input type="text" class="form-control" placeholder="'. $field['topic'] .'" name="customSearch['. $field['field'] .']" value="" /> ';
+                    echo     '<input type="text" class="form-control" placeholder="'. $field['topic'] .'" name="customSearch['. $field['field'] .']" value="'. $customSearch[$field['field']] .'" /> ';
                     echo '</div> ';
             }
         } ?>
