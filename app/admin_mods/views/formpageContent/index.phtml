@@ -20,22 +20,33 @@
 <div class="page-header">
     <form name="form-search" id="form-search" class="form-inline" method="get">
         <?php foreach( $fields as $field ) {
+
+            $value = null;
+            if ( isset($customSearch[$field['field']]) ) {
+                $value = $customSearch[$field['field']];
+            }
+
             switch( $field['type'] ) {
                 case 'radio':
                     echo '<div class="form-group">';
                     echo     '<select class="form-control" name="customSearch['. $field['field'] .']">';
                     echo     '<option value="">所有的『'. $field['topic'] .'』</option>';
                     foreach( $field['format'] as $option ) {
-                        echo '<option value="'. $option .'">'. $option .'</option>';
+                        $selected = null;
+                        if ( $value === $option ) {
+                            $selected = ' selected ';
+                        }
+                        echo '<option value="'. $option .'" '. $selected .'>'. $option .'</option>';
                     }
                     echo     '</select>';
                     echo '</div> ';
                 break;
                 default:
                     echo '<div class="form-group">';
-                    echo     '<input type="text" class="form-control" placeholder="'. $field['topic'] .'" name="customSearch['. $field['field'] .']" value="'. $customSearch[$field['field']] .'" /> ';
+                    echo     '<input type="text" class="form-control" placeholder="'. $field['topic'] .'" name="customSearch['. $field['field'] .']" value="'. $value .'" /> ';
                     echo '</div> ';
             }
+
         } ?>
         <input type="hidden" name="formPageId" value="<?php echo $formPage->getId(); ?>" />
         <button type="submit" class="btn btn-primary">搜尋</button>
