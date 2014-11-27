@@ -48,6 +48,7 @@ $factoryApplication = function()
         'SqlFormatter'          => $appPath .'/vendors/csv_parser/SqlFormatter.php',
     ));
     $loader->registerNamespaces(array(
+        'HipChat'               => $appPath .'/vendors/HipChat/',
         'Whoops'                => $appPath .'/vendors/whoops/',
         'Blocks'                => $appPath .'/'. APP_PORTAL .'_mods/blocks/',
     ));

@@ -14,11 +14,9 @@ class InfoBrg
      *  傳送至 hipChat service
      *  @return boolean
      */
-    public static function hipChat( $text, $roomName='stargazer', $from='gear', $color=null )
+    protected static function _hipChat( $text, $roomName='stargazer', $from='gear', $color=null )
     {
-        Yii::import('application.vendors.HipChat.*');
-        require_once 'HipChat.php';
-        $hc = new HipChat\HipChat('bd4eebbe15ea209d5c51c737bfe6e9');
+        $hc = new HipChat\HipChat(APP_HIPCHAT_API_KEY);
 
         $roomId = 0;
         try {
@@ -39,7 +37,8 @@ class InfoBrg
 
         try {
             $room_data = $hc->get_room($roomId);
-            // print_r( $room_data->participants );
+            // echo '<pre>'; print_r( $room_data->participants ); echo '</pre>';
+            // LogBrg::custom( 'info.log', 'hipchat - '. $text );
             $hc->message_room( $roomName, $from, $text, false, $color );
         }
         catch (HipChat_Exception $e) {
@@ -55,7 +54,7 @@ class InfoBrg
      */
     public static function hipChatByMessagesApi( $text, $roomName, $from )
     {
-        self::hipChat( $text, $roomName, $from, 'purple' );
+        self::_hipChat( $text, $roomName, $from, 'purple' );
     }
 
     /**
@@ -77,11 +76,13 @@ class InfoBrg
     // }
 
     /**
-     *  傳送至 yii database log
+     *  log save to database
      *  @return boolean
      */
-    public static function db( $text, $level, $category )
+    public static function db( $text )
     {
+        return false;
+
         if ( is_array($data) ) {
             $message = json_encode($data);
         }
@@ -99,7 +100,8 @@ class InfoBrg
             $message = $message ."\n". "client ip=". $ip;
         }
 
-        Yii::log( $message, $level, $category );
+        // write to log
+        // ....
         return true;
     }
 
