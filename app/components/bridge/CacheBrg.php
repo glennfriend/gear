@@ -26,7 +26,7 @@ class CacheBrg
 
         // Backend: 主要負責溝通, 并根據前端的需求讀寫數據。
         $cache = new Phalcon\Cache\Backend\File($frontCache, array(
-            "cacheDir" => $cachePath
+            "cacheDir" => $cachePath.'/'
         ));
 
         /*
