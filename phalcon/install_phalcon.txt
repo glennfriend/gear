@@ -18,14 +18,10 @@ install on CentOS/Fedora/RHEL
 php.ini add extension
 
     vi /etc/php5/conf.d/phalcon.ini
-        extension=phalcon.so
-
     vi /etc/php.d/phalcon.ini
-        extension=phalcon.so
-
     vi /usr/local/zend/etc/conf.d/phalcon.ini
+    vi /etc/php5/mods-available/phalcon.ini
         extension=phalcon.so
-
 
 如果安裝 install 檔案時出錯
 
@@ -50,3 +46,13 @@ php.ini add extension
     php -i | grep "phalcon"
 
 
+--------------------------------------------------------------------------------
+install phalcon by phpbrew
+
+    option one
+        phpbrew ext install phalcon
+        phpbrew ext install https://github.com/phalcon/cphalcon
+        phpbrew ext install git@github.com:phalcon/cphalcon.git
+
+    enable
+        phpbrew ext enable phalcon

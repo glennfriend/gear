@@ -61,8 +61,8 @@ $factoryApplication = function()
     RegisterManager::set('url', $app->url );
 
     //
-    LogBrg::init(   APP_BASE_PATH .'/var/log/'   );
-    CacheBrg::init( APP_BASE_PATH .'/var/cache/' );
+    LogBrg::init(   APP_BASE_PATH .'/var/log'   );
+    CacheBrg::init( APP_BASE_PATH .'/var/cache' );
 
     // custom
     $customLoader = function( $appPath, $di ) {
