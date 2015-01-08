@@ -4,17 +4,17 @@
 
     <div class="form-group">
         <label for="">System Time Zone</label>
-        <input type="text" class="form-control" value="<?php echo date_default_timezone_get(); ?>" readonly="readonly">
+        <pre><?php echo date_default_timezone_get(); ?></pre>
     </div>
 
     <div class="form-group">
         <label for="">Time Zone by ini_get('date.timezone')</label>
-        <input type="text" class="form-control" value="<?php echo ini_get('date.timezone'); ?>" readonly="readonly">
+        <pre><?php echo ini_get('date.timezone'); ?></pre>
     </div>
 
     <div class="form-group">
         <label for="">Time by System Environment</label>
-        <input type="text" class="form-control" value="<?php echo date("Y-m-d H:i:s (w)"); ?>" readonly="readonly">
+        <pre><?php echo date("Y-m-d H:i:s (w)"); ?></pre>
     </div>
 
     <div class="row">
@@ -24,19 +24,19 @@
             <?php ini_set('date.timezone','Europe/London'); ?>
             <div class="form-group">
                 <label for="">by "<?php echo ini_get('date.timezone'); ?>" (UTC +0) </label>
-                <input type="text" class="form-control" value="<?php echo date("Y-m-d H:i:s (w)"); ?>" readonly="readonly">
+                <pre><?php echo date("Y-m-d H:i:s (w)"); ?></pre>
             </div>
 
             <?php ini_set('date.timezone','Asia/Taipei'); ?>
             <div class="form-group">
                 <label for="">by "<?php echo ini_get('date.timezone'); ?>"</label>
-                <input type="text" class="form-control" value="<?php echo date("Y-m-d H:i:s (w)"); ?>" readonly="readonly">
+                <pre><?php echo date("Y-m-d H:i:s (w)"); ?></pre>
             </div>
 
             <?php ini_set('date.timezone','America/Los_Angeles'); ?>
             <div class="form-group">
                 <label for="">by "<?php echo ini_get('date.timezone'); ?>"</label>
-                <input type="text" class="form-control" value="<?php echo date("Y-m-d H:i:s (w)"); ?>" readonly="readonly">
+                <pre><?php echo date("Y-m-d H:i:s (w)"); ?></pre>
             </div>
             <span>※如果以上的 timezone 都相同, 表示該 "主機" 無法使用 ini_set() 命令</span>
 
@@ -45,7 +45,7 @@
 
     <div class="form-group">
         <label for="">Server API</label>
-        <input type="text" class="form-control" value="<?php echo php_sapi_name(); ?>" readonly="readonly">
+        <pre><?php echo php_sapi_name(); ?></pre>
         
     </div>
     <span>※Apache *.* Handler => mod_php</span>

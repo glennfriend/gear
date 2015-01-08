@@ -17,16 +17,15 @@
 
     <div class="form-group">
         <label for="">Load Gearman extension</label>
-        <input type="text" class="form-control" value="<?php echo $isLoaded; ?>" readonly="readonly">
+        <pre><?php echo $isLoaded; ?></pre>
     </div>
 
     <div class="form-group">
         <label for="">Gearman version</label>
-        <input type="text" class="form-control" value="<?php echo $version; ?>" readonly="readonly">
+        <pre><?php echo $version; ?></pre>
     </div>
 
     <div class="form-group">
         <label for="">ps ax | grep gearmand</label>
-        <input type="text" class="form-control" value="<?php echo exec('ps ax | grep gearmand'); ?>" readonly="readonly">
+        <pre><?php echo exec('ps ax | grep gearmand'); ?></pre>
     </div>
-
