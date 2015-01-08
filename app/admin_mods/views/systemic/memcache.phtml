@@ -1,0 +1,96 @@
+<?php
+
+    $version = '?';
+    if ( !class_exists('Memcache') ) {
+        die('Memcache not found.');
+    }
+
+    $memcache = new Memcache;
+    $memcache->addServer(APP_MEMCACHE_HOST, APP_MEMCACHE_PORT);
+    $memcache->setfailurecallback(function( $server, $host ){
+        return null;
+    });
+
+    // button style
+    $buttonStyle = array(
+        'status' => '',
+        'items'  => '',
+    );
+
+    // button url
+    $buttonUrl = array(
+        'status' => url('systemic/memcache', array('type'=>'status')),
+        'items'  => url('systemic/memcache', array('type'=>'items')),
+    );
+
+    $type = trim(InputBrg::get('type'));
+    switch ($type) {
+        case 'items':
+            $title = "Items";
+            $content = print_r(getAllKeyExpire($memcache,true), true);
+            $buttonStyle[$type] = 'btn-primary';
+            break;
+        default:
+            $title = "Status";
+            $content = print_r($memcache->getStats(), true);
+            $buttonStyle['status'] = 'btn-primary';
+            break;
+    }
+
+    $memcache->close();
+
+?>
+
+    <div class="form-group">
+        <?php $url = url('systemic/memcache', array('type'=>'status')); ?>
+        <button
+                class="<?php echo $buttonStyle['status']; ?>"
+                onclick="window.location.href='<?php echo $buttonUrl['status'] ?>';" >Status</button>
+
+        <?php $url = url('systemic/memcache', array('type'=>'items')); ?>
+        <button
+                class="<?php echo $buttonStyle['items']; ?>"
+                onclick="window.location.href='<?php echo $buttonUrl['items'] ?>';" >Items</button>
+    </div>
+
+    <div class="form-group">
+        <pre><?php echo $content; ?></pre>
+    </div>
+
+<?php
+
+    /**
+     *  get all key and key expire
+     *  @return array or empty array
+     */
+    function getAllKeyExpire( $memcache, $isFormat=false )
+    {
+        // check memcache server
+        if ( !$memcache->getversion() ) {
+            return array();
+        }
+
+        $list = array();
+        $allSlabs = $memcache->getExtendedStats('slabs');
+        $items = $memcache->getExtendedStats('items');
+
+        foreach ($allSlabs as $server => $slabs) {
+            foreach ($slabs as $slabId => $slabMeta) {
+                $cdump = $memcache->getExtendedStats('cachedump',(int)$slabId);
+                foreach ($cdump as $keys => $arrVal) {
+                    if (!is_array($arrVal)) {
+                        continue;
+                    }
+                    foreach ($arrVal as $k => $v) {
+                        if ( $isFormat ) {
+                            $list[$k] = date("Y-m-d H:i:s", $v[1]);
+                        }
+                        else {
+                            $list[$k] = $v[1];
+                        }
+                    }
+                }
+            }
+        }
+        return $list;
+    }

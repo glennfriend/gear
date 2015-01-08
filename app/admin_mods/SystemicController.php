@@ -70,6 +70,14 @@ class SystemicController extends ControllerBase
         ));
     }
 
+    public function MemcacheAction()
+    {
+        MenuManager::setSubKey('memcache');
+        $this->view->setVars(Array(
+            'label' => 'Memcache',
+        ));
+    }
+
     public function GearmanAction()
     {
         MenuManager::setSubKey('gearman');

@@ -77,6 +77,11 @@
                 'role'  => $roles['manager'],
             ),
             array(
+                'key'   => 'memcache',
+                'link'  => url('systemic/memcache'),
+                'role'  => $roles['manager'],
+            ),
+            array(
                 'key'   => 'gearman',
                 'link'  => url('systemic/gearman'),
                 'role'  => $roles['manager'],

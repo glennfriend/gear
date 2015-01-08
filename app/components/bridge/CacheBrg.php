@@ -24,20 +24,20 @@ class CacheBrg
             "lifetime" => APP_CACHE_LIFETIME
         ));
 
-        // Backend: 主要負責溝通, 并根據前端的需求讀寫數據。
-        $cache = new Phalcon\Cache\Backend\File($frontCache, array(
-            "cacheDir" => $cachePath.'/'
-        ));
-
-        /*
-        $cache = new Phalcon\Cache\Backend\Memcached($frontCache, array(
-            "host" => "localhost",
-            "port" => "11211"
-        ));
-        */
+        // Backend: 主要負責溝通, 并根據前端的需求讀寫數據
+        if ( 'memcache' === APP_CACHE_TYPE ) {
+            $cache = new Phalcon\Cache\Backend\Memcache($frontCache, array(
+                "host" => APP_MEMCACHE_HOST,
+                "port" => APP_MEMCACHE_PORT
+            ));
+        }
+        else {
+            $cache = new Phalcon\Cache\Backend\File($frontCache, array(
+                "cacheDir" => $cachePath.'/'
+            ));
+        }
 
         self::$cache = $cache;
-
     }
 
     /* --------------------------------------------------------------------------------
